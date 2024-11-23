@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var jokesVM = JokesViewModel()
+    @State private var isIpad = UIDevice .current.userInterfaceIdiom == .pad
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+        if isIpad {
+            List(jokesVM.jokes) { element in
+                Text(element.joke)
+              
+            }
         }
-        .padding()
+        else {
+            NavigationView {
+                
+                List(jokesVM.jokes) { element in
+                    Text(element.joke)
+                  
+                }
+                
+            }.navigationTitle("Jokes App")
+        }
+    }
+        
     }
 }
 
