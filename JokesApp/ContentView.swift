@@ -26,12 +26,21 @@ struct ContentView: View {
                 List(jokesVM.jokes) { element in
                     Text(element.joke)
                   
+                }.toolbar {
+                    Button(action: addJoke) {
+                        Text("Get Jokes")
+                    }
                 }
+                .navigationTitle("Jokes App")
                 
-            }.navigationTitle("Jokes App")
+            }
         }
     }
         
+    }
+    
+    func addJoke()  {
+        jokesVM.getJokes()
     }
 }
 
